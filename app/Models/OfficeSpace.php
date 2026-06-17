@@ -7,9 +7,11 @@ use App\Models\OfficeSpaceBenefit;
 use App\Models\OfficeSpacePhoto;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
+use PhpParser\Parser\Php8;
 
 class OfficeSpace extends Model
 {
@@ -28,7 +30,7 @@ class OfficeSpace extends Model
         'city_id',
     ];
 
-    public function setNameAttributes($value){
+    public function setNameAttribute($value){
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = Str::slug($value);
     }
@@ -43,8 +45,8 @@ class OfficeSpace extends Model
         return $this->hasMany(OfficeSpaceBenefit::class);
     }
 
-    public function city(): HasMany
+    public function city(): BelongsTo
     {
-        return $this->hasMany(City::class);
+        return $this->belongsTo(City::class);
     }
 }

@@ -19,7 +19,7 @@ class City extends Model
         'photo',
     ];
 
-    public function setNameAttributes($value){
+    public function setNameAttribute($value){
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = Str::slug($value);
     }

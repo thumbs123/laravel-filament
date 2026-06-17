@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Cities\Schemas;
 
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 
@@ -12,11 +13,14 @@ class CityForm
         return $schema
             ->components([
                 TextInput::make('name')
+                    ->helperText('Gunakan nama data dengan tepat')
+                    ->required()
+                    ->maxLength(255),
+                FileUpload::make('photo')
+                    ->image()
                     ->required(),
-                TextInput::make('photo')
-                    ->required(),
-                TextInput::make('slug')
-                    ->required(),
+                // TextInput::make('slug')
+                //     ->required(),
             ]);
     }
 }
